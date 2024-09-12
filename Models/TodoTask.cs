@@ -2,7 +2,7 @@
 
 namespace TodoApp.Models
 {
-    public class Task
+    public class TodoTask
     {
         public int TaskId  { get; set; }
         public int UserId { get; set; }
