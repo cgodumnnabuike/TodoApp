@@ -15,5 +15,13 @@ namespace TodoApp.Data
         }
 
         public DbSet<TodoApp.Models.TodoTask> Task { get; set; } = default!;
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<TodoTask>()
+                .HasKey(t => t.TaskId);  // Define the primary key
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
