@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using TodoApp.Models;
 
 namespace TodoApp.Data
 {
-    public class TodoAppContext : DbContext
+    public class TodoAppContext : IdentityDbContext<IdentityUser>
     {
         public TodoAppContext (DbContextOptions<TodoAppContext> options)
             : base(options)

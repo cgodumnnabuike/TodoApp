@@ -1,9 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System.Configuration;
 using TodoApp.Data;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<TodoAppContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("TodoAppContext") ?? throw new InvalidOperationException("Connection string 'TodoAppContext' not found.")));
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<TodoAppContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -24,6 +28,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseAuthentication(); 
 
 app.MapControllerRoute(
     name: "default",
